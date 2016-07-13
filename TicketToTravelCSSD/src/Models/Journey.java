@@ -2,118 +2,113 @@ package Models;
 
 import java.io.Serializable;
 
-/**
- *
- * @author Chathuri Lakmini
- */
 public class Journey implements Serializable {
     
-    private int JourneyId;
+    private int journeyId;
     
-    private String StartLocation;
+    private String startLocation;
     
-    private String EndLocation;
+    private String endLocation;
     
-    private double Distance;
+    private double distance;
     
-    private String StartTime;
+    private String startTime;
     
-    private String EndTime;
+    private String endTime;
     
-    private int PassengerCount;
+    private int passengerCount;
     
-    private double CostPerKilometer;
+    private double costPerKilometer;
     
-    private static int JourneyCount=0;
+    private static int journeyCount=0;
 
     public Journey() {
         
-        this.JourneyId=0;
-        this.StartLocation=null;
-        this.EndLocation=null;
-        this.EndLocation=null;
-        this.Distance=0;
-        this.StartTime=null;
-        this.EndTime=null;
-        this.PassengerCount=0;
-        this.CostPerKilometer=0;
+        this.journeyId=0;
+        this.startLocation=null;
+        this.endLocation=null;
+        this.distance=0;
+        this.startTime=null;
+        this.endTime=null;
+        this.passengerCount=0;
+        this.costPerKilometer=0;
     }
 
     
-    public Journey(String StartLocation, String EndLocation, double Distance, String StartTime, String EndTime, int PassengerCount, double CostPerKilometer) {
+    public Journey(String startLocation, String endLocation, double distance, String startTime, String endTime, int passengerCount, double costPerKilometer) {
         
-        this.JourneyId=++JourneyCount;
-        this.StartLocation = StartLocation;
-        this.EndLocation = EndLocation;
-        this.Distance = Distance;
-        this.StartTime = StartTime;
-        this.EndTime = EndTime;
-        this.PassengerCount = PassengerCount;
-        this.CostPerKilometer = CostPerKilometer;
+        this.journeyId=++journeyCount;
+        this.startLocation = startLocation;
+        this.endLocation = endLocation;
+        this.distance = distance;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.passengerCount = passengerCount;
+        this.costPerKilometer = costPerKilometer;
     }
     
     public int getJourneyId() {
-        return JourneyId;
+        return journeyId;
     }
 
-    public void setJourneyId(int JourneyId) {
-        this.JourneyId = JourneyId;
+    public void setJourneyId(int journeyId) {
+        this.journeyId = journeyId;
     }
 
     public String getStartLocation() {
-        return StartLocation;
+        return startLocation;
     }
 
-    public void setStartLocation(String StartLocation) {
-        this.StartLocation = StartLocation;
+    public void setStartLocation(String startLocation) {
+        this.startLocation = startLocation;
     }
 
     public String getEndLocation() {
-        return EndLocation;
+        return endLocation;
     }
 
-    public void setEndLocation(String EndLocation) {
-        this.EndLocation = EndLocation;
+    public void setEndLocation(String endLocation) {
+        this.endLocation = endLocation;
     }
 
     public double getDistance() {
-        return Distance;
+        return distance;
     }
 
-    public void setDistance(double Distance) {
-        this.Distance = Distance;
+    public void setDistance(double distance) {
+        this.distance = distance;
     }
 
     public String getStartTime() {
-        return StartTime;
+        return startTime;
     }
 
-    public void setStartTime(String StartTime) {
-        this.StartTime = StartTime;
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
     }
 
     public String getEndTime() {
-        return EndTime;
+        return endTime;
     }
 
-    public void setEndTime(String EndTime) {
-        this.EndTime = EndTime;
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
     }
 
     public int getPassengerCount() {
-        return PassengerCount;
+        return passengerCount;
     }
 
-    public void setPassengerCount(int PassengerCount) {
-        this.PassengerCount = PassengerCount;
+    public void setPassengerCount(int passengerCount) {
+        this.passengerCount = passengerCount;
     }
 
     public double getCostPerKilometer() {
-        return CostPerKilometer;
+        return costPerKilometer;
     }
 
-    public void setCostPerKilometer(double CostPerKilometer) {
-        this.CostPerKilometer = CostPerKilometer;
+    public void setCostPerKilometer(double costPerKilometer) {
+        this.costPerKilometer = costPerKilometer;
     }
      
 }
