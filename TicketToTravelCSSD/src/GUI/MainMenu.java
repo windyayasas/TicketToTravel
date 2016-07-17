@@ -7,6 +7,9 @@
 package GUI;
 
 import java.awt.BorderLayout;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -248,8 +251,10 @@ public class MainMenu extends javax.swing.JFrame {
         mainView.setLayout(new BorderLayout());
         try {
             mainView.add(new RegisterUser());
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException ex) {
+            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
         mainView.repaint();
         pack();

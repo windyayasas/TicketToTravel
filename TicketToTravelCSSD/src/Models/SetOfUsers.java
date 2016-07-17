@@ -4,6 +4,8 @@ package Models;
  *
  * @author Chathuri Lakmini
  */
+
+import java.io.ObjectStreamException;
 import java.util.Vector;
 
 public class SetOfUsers extends Vector<User> {
@@ -66,4 +68,24 @@ public class SetOfUsers extends Vector<User> {
 
     }
 
+    private static SetOfUsers INSTANCE;
+
+    public static SetOfUsers getInstance() {
+
+        if (INSTANCE == null) {
+
+            synchronized (SetOfUsers.class) {
+
+                if (INSTANCE == null) {
+                    INSTANCE = new SetOfUsers();
+                }
+            }
+        }
+
+        return INSTANCE;
+    }
+
+    private Object readResolve() throws ObjectStreamException {
+        return INSTANCE;
+    }
 }

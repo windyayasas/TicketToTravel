@@ -24,12 +24,14 @@ public class Serialization
 {
 
     public static void serializeUser(SetOfUsers userSet) throws IOException
-    {   
+    { 
+        SetOfUsers INSTANCE = SetOfUsers.getInstance();  
+        INSTANCE=userSet;
         FileOutputStream fo=new FileOutputStream("UserData.ser"); 
            
         ObjectOutputStream os=new ObjectOutputStream(fo); 
         
-        os.writeObject(userSet);
+        os.writeObject(INSTANCE);
         
         os.flush();
         
@@ -44,6 +46,7 @@ public class Serialization
 
     public static SetOfUsers desirializeUser() throws IOException, ClassNotFoundException
     {
+        
         FileInputStream fs=new FileInputStream(new File("UserData.ser")); 
         
         ObjectInputStream os=new ObjectInputStream(fs); 

@@ -1,5 +1,7 @@
 package Models;
 
+
+import java.io.ObjectStreamException;
 import java.io.Serializable;
 
 /**
@@ -7,41 +9,41 @@ import java.io.Serializable;
  * @author Chathuri Lakmini
  */
 public class User implements Serializable {
-    
+
     private int userId;
-    
+
     private String userName;
-    
+
     private String email;
-    
+
     private String password;
-    
+
     private String address;
-    
+
     private String secretQuestion;
-    
+
     private String answer;
-    
+
     private String location;
-    
+
     private String role;
-    
-    private static int userCount=0;
-    
+
+    private static int userCount = 0;
+
     public User() {
-        this.userId=0;
-        this.userName=null;
-        this.email=null;
-        this.password=null;
-        this.address=null;
-        this.secretQuestion=null;
-        this.answer=null;
-        this.location=null;
-        this.role=null;
+        this.userId = 0;
+        this.userName = null;
+        this.email = null;
+        this.password = null;
+        this.address = null;
+        this.secretQuestion = null;
+        this.answer = null;
+        this.location = null;
+        this.role = null;
     }
 
     public User(String userName, String email, String password, String address, String secretQuestion, String answer, String location, String role) {
-        
+
         this.userId = ++userCount;
         this.userName = userName;
         this.email = email;
@@ -53,8 +55,6 @@ public class User implements Serializable {
         this.role = role;
     }
 
-    
-    
     public void setUserId(int userId) {
         this.userId = userId;
     }
@@ -91,7 +91,6 @@ public class User implements Serializable {
         this.role = role;
     }
 
-    
     public int getUserId() {
         return userId;
     }
@@ -127,5 +126,25 @@ public class User implements Serializable {
     public String getRole() {
         return role;
     }
-    
+
+    private static User INSTANCE;
+
+    public static User getInstance() {
+
+        if (INSTANCE == null) {
+
+            synchronized (User.class) {
+
+                if (INSTANCE == null) {
+                    INSTANCE = new User();
+                }
+            }
+        }
+
+        return INSTANCE;
+    }
+
+    private Object readResolve() throws ObjectStreamException {
+        return INSTANCE;
+    }
 }
