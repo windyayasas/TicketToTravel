@@ -247,7 +247,7 @@ public class MainMenu extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         //  1098 * 442 size for every panel  110*47 button size 
         
-        mainView.removeAll();
+    mainView.removeAll();
         mainView.setLayout(new BorderLayout());
         try {
             mainView.add(new RegisterUser());
@@ -258,7 +258,6 @@ public class MainMenu extends javax.swing.JFrame {
         }
         mainView.repaint();
         pack();
-        
         
         /*
          

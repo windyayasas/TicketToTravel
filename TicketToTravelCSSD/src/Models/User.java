@@ -44,7 +44,7 @@ public class User implements Serializable {
 
     public User(String userName, String email, String password, String address, String secretQuestion, String answer, String location, String role) {
 
-        this.userId = ++userCount;
+        
         this.userName = userName;
         this.email = email;
         this.password = password;

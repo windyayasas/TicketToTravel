@@ -83,7 +83,7 @@ public class Serialization
     {
 
         User user1 = new User("Chat", "chat@gmailcom", "123456", "malabe", "What?", "Here", "xyz","passenger");
-        
+        user1.setUserId(1);
         SetOfUsers userSet = new SetOfUsers();
         
         userSet.addUser(user1);
