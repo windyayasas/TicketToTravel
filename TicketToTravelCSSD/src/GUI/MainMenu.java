@@ -112,9 +112,14 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
-        jButton8.setText("110*47");
+        jButton8.setText("Admin");
         jButton8.setBorderPainted(false);
         jButton8.setFocusPainted(false);
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -300,6 +305,15 @@ public class MainMenu extends javax.swing.JFrame {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // 
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        //This is th intial frame for the Transport Administrator 
+        mainView.removeAll();
+        mainView.setLayout(new BorderLayout());
+        mainView.add(new Admin());
+        mainView.repaint();
+        pack();
+    }//GEN-LAST:event_jButton8ActionPerformed
 
     /**
      * @param args the command line arguments
