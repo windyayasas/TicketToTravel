@@ -3,8 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package DAO;
+
+import Models.SetOfUsers;
+import Models.User;
+import static Utility.Serialization.desirializeUser;
+import java.io.IOException;
 
 /**
  *
@@ -12,11 +16,27 @@ package DAO;
  */
 public class AuthenticateDAO {
 
-    public static void setAuth(boolean b) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private final SetOfUsers stUsers;
+    private User selectedUser;
+    private static String Username;
+    private static int UserID;
+    private String Password;
+    private String dbPassword;
+    private static boolean auth;
+    private String role;
+    private SetOfUsers tmpUsers;
+
+    public AuthenticateDAO(String Username, String Password) throws IOException, ClassNotFoundException {
+        stUsers = desirializeUser();
+        AuthenticateDAO.Username = Username;
+        this.Password = Password;
+        AuthenticateDAO.auth = false;
+        tmpUsers=stUsers.getUserFromName(Username);
+        
+
     }
 
-    public AuthenticateDAO(String text, String text0) {
+    public static void setAuth(boolean b) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -31,5 +51,5 @@ public class AuthenticateDAO {
     public String getRole() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }
