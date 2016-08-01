@@ -5,11 +5,11 @@
  */
 package GUI;
 
-import static Serialization.Serialization.desirializeUser;
+import static Utility.Serialization.desirializeUser;
 
 import Models.SetOfUsers;
 import Models.User;
-import Serialization.Serialization;
+import Utility.Serialization;
 import java.io.IOException;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;

@@ -1,6 +1,6 @@
 package GUI;
 
-import static Serialization.Serialization.desirializeUser;
+import static Utility.Serialization.desirializeUser;
 import Models.SetOfUsers;
 import java.io.IOException;
 import java.util.logging.Level;

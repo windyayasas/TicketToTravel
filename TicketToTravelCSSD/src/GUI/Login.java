@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package GUI;
+
+import DAO.AuthenticateDAO;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -59,6 +61,11 @@ public class Login extends javax.swing.JFrame {
         txtUsername.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtUsername.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtUsername.setToolTipText("Enter Username here ");
+        txtUsername.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUsernameActionPerformed(evt);
+            }
+        });
         txtUsername.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtUsernameKeyPressed(evt);
@@ -180,15 +187,55 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // get the details and validate
-        this.dispose();
-        new MainMenu().setVisible(true);
-        new MainMenu().setLocationRelativeTo(null);
+
+        try {
+            AuthenticateDAO Auth = new AuthenticateDAO(txtUsername.getText(), txtPassword.getText());
+            System.out.println(Auth.getPassword());
+
+            if (Auth.getDbPassword().equals(Auth.getPassword())) {
+
+                System.out.println(Auth.getRole());
+                AuthenticateDAO.setAuth(true);
+                switch (Auth.getRole()) {
+                    case "student":
+                        this.dispose();
+                        new MainMenu().setVisible(true);
+                        new MainMenu().setLocationRelativeTo(null);
+
+                        break;
+                    case "lecture":
+                        this.dispose();
+                        new MainMenu().setVisible(true);
+                        new MainMenu().setLocationRelativeTo(null);
+
+                        break;
+                    case "admin":
+                        this.dispose();
+                        new MainMenu().setVisible(true);
+                        new MainMenu().setLocationRelativeTo(null);
+                        break;
+
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Incorrect Password");
+            }
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "Incorrect Username or Password");
+
+        }
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtUsernameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsernameKeyPressed
         // click this
-        
+
     }//GEN-LAST:event_txtUsernameKeyPressed
+
+    private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUsernameActionPerformed
 
     /**
      * @param args the command line arguments
