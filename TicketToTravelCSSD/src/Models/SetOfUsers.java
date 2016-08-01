@@ -45,6 +45,31 @@ public class SetOfUsers extends Vector<User> {
         return user_set;
 
     }
+    
+     public SetOfUsers getUserFromPassword(String Password) {
+
+        int size;
+
+        size = this.size();
+
+        User auser;
+
+        SetOfUsers user_set = SetOfUsers.getInstance();
+
+        for (int key = 0; key < size; key++) {
+            auser = this.get(key);
+
+            if (auser.getPassword().equals(Password)) {
+                user_set.add(auser);
+            }
+
+        }
+        return user_set;
+
+    }
+    
+    
+    
 
     public SetOfUsers getUserFromNumber(int userId) {
 

@@ -17,39 +17,37 @@ import java.io.IOException;
 public class AuthenticateDAO {
 
     private final SetOfUsers stUsers;
-    private User selectedUser;
-    private static String Username;
-    private static int UserID;
-    private String Password;
-    private String dbPassword;
+    private static User currentUser;
     private static boolean auth;
-    private String role;
+
     private SetOfUsers tmpUsers;
 
     public AuthenticateDAO(String Username, String Password) throws IOException, ClassNotFoundException {
+
         stUsers = desirializeUser();
-        AuthenticateDAO.Username = Username;
-        this.Password = Password;
         AuthenticateDAO.auth = false;
-        tmpUsers=stUsers.getUserFromName(Username);
+        tmpUsers = stUsers.getUserFromName(Username);
+        tmpUsers = tmpUsers.getUserFromPassword(Password);
+
+        if (tmpUsers.size() > 0) {
+            AuthenticateDAO.currentUser = tmpUsers.get(0);
+            AuthenticateDAO.auth = true;
+
+        }
+
+    }
+
+    public static boolean getAuth() {
+        return AuthenticateDAO.auth;
+    }
+
+    public static void setAuth(boolean auth) {
+        AuthenticateDAO.auth = auth;
+    }
+
+    public static User getCurrentUser() {
         
-
-    }
-
-    public static void setAuth(boolean b) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public Object getDbPassword() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public Object getPassword() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public String getRole() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       return  AuthenticateDAO.currentUser;
     }
 
 }

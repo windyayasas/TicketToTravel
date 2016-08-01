@@ -6,6 +6,9 @@
 package GUI;
 
 import DAO.AuthenticateDAO;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -187,16 +190,22 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // get the details and validate
-
+        String Role="";
         try {
-            AuthenticateDAO Auth = new AuthenticateDAO(txtUsername.getText(), txtPassword.getText());
-            System.out.println(Auth.getPassword());
+            try {
+                AuthenticateDAO Auth = new AuthenticateDAO(txtUsername.getText(), txtPassword.getText());
+            } catch (IOException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           
 
-            if (Auth.getDbPassword().equals(Auth.getPassword())) {
+            if (AuthenticateDAO.getAuth()==true) {
 
-                System.out.println(Auth.getRole());
-                AuthenticateDAO.setAuth(true);
-                switch (Auth.getRole()) {
+                System.out.println(AuthenticateDAO.getCurrentUser().getRole());
+                Role=AuthenticateDAO.getCurrentUser().getRole();
+                switch (Role) {
                     case "student":
                         this.dispose();
                         new MainMenu().setVisible(true);
