@@ -21,6 +21,7 @@ public class RegisterUser extends javax.swing.JPanel {
 
     public RegisterUser() throws IOException, ClassNotFoundException {
         initComponents();
+        userAll=SetOfUsers.getInstance();
         userAll = desirializeUser();
         updateUserTable(userAll);
     }
@@ -463,7 +464,7 @@ public class RegisterUser extends javax.swing.JPanel {
             User aUser = new User(userName, email, password, address, secretQuestion, answer, location, role);
 
             //User lastAcc = userAll.get(userAll.size() - 1);
-            //aUser.setUserId(lastAcc.getUserId() + 1);
+           // aUser.setUserId(lastAcc.getUserId() + 1);
             userAll.add(aUser);
 
             try {

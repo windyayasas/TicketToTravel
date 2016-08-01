@@ -206,7 +206,7 @@ public class Login extends javax.swing.JFrame {
                 System.out.println(AuthenticateDAO.getCurrentUser().getRole());
                 Role=AuthenticateDAO.getCurrentUser().getRole();
                 switch (Role) {
-                    case "student":
+                    case "passenger":
                         this.dispose();
                         new MainMenu().setVisible(true);
                         new MainMenu().setLocationRelativeTo(null);

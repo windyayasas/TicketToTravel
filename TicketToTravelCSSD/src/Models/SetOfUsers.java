@@ -110,7 +110,7 @@ public class SetOfUsers extends Vector<User> {
         return INSTANCE;
     }
 
-    private Object readResolve() throws ObjectStreamException {
+    private SetOfUsers readResolve() throws ObjectStreamException {
         return INSTANCE;
     }
 }

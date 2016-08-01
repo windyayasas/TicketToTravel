@@ -144,7 +144,7 @@ public class User implements Serializable {
         return INSTANCE;
     }
 
-    private Object readResolve() throws ObjectStreamException {
+    private User readResolve() throws ObjectStreamException {
         return INSTANCE;
     }
 }
