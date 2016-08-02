@@ -3,6 +3,7 @@ package Utility;
 import Models.Inspector;
 import Models.Route;
 import Models.SetOfInspectors;
+import Models.SetOfPublicTransportManager;
 import Models.SetOfRoutes;
 import Models.SetOfUsers;
 import Models.User;
@@ -71,6 +72,30 @@ public class Serialization {
 
     }
     
+    public static void serializePublicTransportManager(SetOfPublicTransportManager userSet) throws IOException {
+
+        SetOfPublicTransportManager INSTANCE = SetOfPublicTransportManager.getInstance();
+        
+        INSTANCE = userSet;
+
+        try (FileOutputStream fileOut = new FileOutputStream("PublicTransportManagerData.ser")) {
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(INSTANCE);
+            out.flush();
+            out.close();
+        }
+        System.out.println("Serialized data is saved PublicTransportManagerData.ser");
+
+    }
+    
+    public static SetOfPublicTransportManager desirializePublicTransportManager() throws IOException, ClassNotFoundException {
+        FileInputStream fis = new FileInputStream(new File("PublicTransportManagerData.ser"));
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        SetOfPublicTransportManager users = SetOfPublicTransportManager.getInstance();
+        users= (SetOfPublicTransportManager) ois.readObject();
+        return users;
+
+    }
 
     public static void serializeRoute(SetOfRoutes routeSet) throws IOException {
         FileOutputStream fo = new FileOutputStream("RouteData.ser");
