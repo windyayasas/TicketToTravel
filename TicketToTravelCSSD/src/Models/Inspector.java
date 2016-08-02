@@ -3,8 +3,7 @@ package Models;
 import java.io.ObjectStreamException;
 
 public class Inspector extends User {
-    
-    
+       
     private Route assignedRoute;
     private boolean isAssiged;
 
