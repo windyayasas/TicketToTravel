@@ -38,7 +38,7 @@ public class SetOfPublicTransportManager extends Vector<PublicTransportManager> 
 
         if (INSTANCE == null) {
 
-            synchronized (SetOfInspectors.class) {
+            synchronized (SetOfPublicTransportManager.class) {
 
                 if (INSTANCE == null) {
                     INSTANCE = new SetOfPublicTransportManager();
