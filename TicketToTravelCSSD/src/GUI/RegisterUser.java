@@ -5,12 +5,15 @@
  */
 package GUI;
 
-import static Utility.Serialization.desirializeUser;
-
+import Models.Inspector;
 import Models.SetOfUsers;
 import Models.User;
 import Utility.Serialization;
+import static Utility.Serialization.desirializeUser;
+import Utility.Validator;
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -18,45 +21,18 @@ import javax.swing.table.DefaultTableModel;
 public class RegisterUser extends javax.swing.JPanel {
 
     private SetOfUsers userAll;
+    Validator vali;
 
     public RegisterUser() throws IOException, ClassNotFoundException {
         initComponents();
-        userAll=SetOfUsers.getInstance();
+        vali = new Validator();
+        userAll = SetOfUsers.getInstance();
         userAll = desirializeUser();
-        updateUserTable(userAll);
+        initTablesAndCombo();
     }
-
-    @SuppressWarnings("unchecked")
-
-    //member validation
-    public boolean userValidate(String userName, String email, String password, String address, String secretQuestion, String answer, String location, String role) {
-
-        if (userName.isEmpty()) {
-            return false;
-        }
-        if (email.isEmpty()) {
-            return false;
-        }
-        if (password.isEmpty()) {
-            return false;
-        }
-        if (address.isEmpty()) {
-            return false;
-        }
-        if (secretQuestion.isEmpty()) {
-            return false;
-        }
-        if (answer.isEmpty()) {
-            return false;
-        }
-        if (location.isEmpty()) {
-            return false;
-        }
-        if (role.isEmpty()) {
-            return false;
-        }
-
-        return true;
+    
+    public void initTablesAndCombo() {
+        updateUserTable(userAll);
 
     }
 
@@ -405,7 +381,7 @@ public class RegisterUser extends javax.swing.JPanel {
                     .addComponent(txtSearch, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(34, 34, 34)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -432,6 +408,7 @@ public class RegisterUser extends javax.swing.JPanel {
 
         System.out.println(" Clear all the fields ");
         System.out.println(" Refresh all fields and the table ");
+        userFieldsClean();
 
 
     }//GEN-LAST:event_btnResetActionPerformed
@@ -458,25 +435,38 @@ public class RegisterUser extends javax.swing.JPanel {
         String secretQuestion = cmbSecretQuestion.getSelectedItem().toString();
         String answer = txtAnswer.getText();
         String location = cmbLocation.getSelectedItem().toString();
-        String role = cmbLocation.getSelectedItem().toString();
+        String role = cmbUserRole.getSelectedItem().toString();
 
-        if (userValidate(userName, email, password, address, secretQuestion, answer, location, role)) {
-            User aUser = new User(userName, email, password, address, secretQuestion, answer, location, role);
+        if (vali.userEmptFieldsVt(userName, email, password, address, secretQuestion, answer, location, role)) {
 
-            //User lastAcc = userAll.get(userAll.size() - 1);
-           // aUser.setUserId(lastAcc.getUserId() + 1);
-            userAll.add(aUser);
+            if (vali.isValidEmailAddress(email)) {
+                 
+                User lastAcc = userAll.get(userAll.size() - 1);
+                if(role.equalsIgnoreCase("Ticket Inspector"))
+                {
+                    Inspector inspector= new Inspector(userName, email, password, address, secretQuestion, answer, location, role);
+                    inspector.setUserId(lastAcc.getUserId() + 1);
+                    userAll.add(inspector);
+                    
+                }
+                
+                
+                
+                
 
-            try {
-                Serialization.serializeUser(userAll);
-                JOptionPane.showMessageDialog(this, "Successfully added");
+                try {
+                    Serialization.serializeUser(userAll);
+                    JOptionPane.showMessageDialog(this, "Successfully added");
 
-            } catch (IOException e) {
-                JOptionPane.showMessageDialog(this, e);
+                } catch (IOException e) {
+                    JOptionPane.showMessageDialog(this, e);
+                }
+
+                userFieldsClean();
+                initTablesAndCombo();
+            } else {
+                JOptionPane.showMessageDialog(this, "Please Insert valid email Address");
             }
-
-            userFieldsClean();
-            updateUserTable(userAll);
 
         } else {
             JOptionPane.showMessageDialog(this, "Please fill all the field");
@@ -524,7 +514,7 @@ public class RegisterUser extends javax.swing.JPanel {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
 
-        updateUserTable(userAll);
+        initTablesAndCombo();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -553,7 +543,7 @@ public class RegisterUser extends javax.swing.JPanel {
             }
         }
 
-        updateUserTable(userAll);
+       initTablesAndCombo();
 
 
     }//GEN-LAST:event_jButton1ActionPerformed

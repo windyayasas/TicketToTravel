@@ -5,52 +5,86 @@
  */
 package GUI;
 
+import Models.Inspector;
 import Models.SetOfUsers;
 import Models.User;
+import static Utility.Serialization.desirializeUser;
+import java.io.IOException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
 
 public class RouteDetails extends javax.swing.JPanel {
 
     private SetOfUsers selectedInspectorSet;
-    
+    private SetOfUsers InspectorSet;
+    private SetOfUsers userAll;
+
     private int noofInspectors;
-    
-    public RouteDetails() {
+
+    public RouteDetails() throws IOException, ClassNotFoundException {
         initComponents();
+
+        selectedInspectorSet = SetOfUsers.getInstance();
+        InspectorSet = SetOfUsers.getInstance();
+        userAll = SetOfUsers.getInstance();
+        userAll = desirializeUser();
+        initInspectorSet();
+        fillInspectorCombo();
         
-        selectedInspectorSet=new SetOfUsers();
-        
+
     }
-    
-    private void updateSelectedInspectorTable(SetOfUsers selectedInspectors)
-    {
-        try
-        {
-             DefaultTableModel model = (DefaultTableModel)InspectorDetailsTable.getModel();
-             
-             model.setRowCount(0);
-             
-             int size=selectedInspectors.size();
-             
-             String arrInspectors[]=new String[5];
-             
-             for(int key=0;key<size;key++)
-             {
+
+    public void initInspectorSet() {
+        int totalUsers = this.userAll.size();
+
+        Inspector user = Inspector.getInstance();
+        for (int index = 0; index < totalUsers; index++) {
+
+            user =(Inspector) userAll.get(index);
+            if ( user.isAssiged() == false) {
+                this.InspectorSet.addUser(user);
+            }
+
+        }
+
+    }
+
+    private void fillInspectorCombo() {
+        cmbInspectorName.removeAllItems();
+        int totalElements = this.InspectorSet.size();
+        User user = User.getInstance();
+        for (int index = 0; index < totalElements; index++) {
+
+            user = this.InspectorSet.get(index);
+
+            cmbInspectorName.addItem(user);
+
+        }
+
+    }
+
+    private void updateSelectedInspectorTable(SetOfUsers selectedInspectors) {
+        try {
+            DefaultTableModel model = (DefaultTableModel) InspectorDetailsTable.getModel();
+
+            model.setRowCount(0);
+
+            int size = selectedInspectors.size();
+
+            String arrInspectors[] = new String[5];
+
+            for (int key = 0; key < size; key++) {
                 //arrInspectors[0]=Integer.toString(selectedInspectors.get(key).getAccessionNumber());
                 //arrInspectors[1]=selectedInspectors.get(key).getTitle();
                 //arrInspectors[2]=selectedInspectors.get(key).getISBN();
-                
-                model.addRow(arrInspectors); 
-             }
-            
+
+                model.addRow(arrInspectors);
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e);
         }
-        catch(Exception e)
-        {
-            JOptionPane.showMessageDialog(this,e);
-        }
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -442,12 +476,12 @@ public class RouteDetails extends javax.swing.JPanel {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        
-        int routeID=Integer.parseInt(txtRouteId.getText());
-        
-        String transportMode=cmbTransportMode.getSelectedItem().toString();
-        
-        
+
+        int routeID = Integer.parseInt(txtRouteId.getText());
+
+        String transportMode = cmbTransportMode.getSelectedItem().toString();
+
+
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -458,20 +492,14 @@ public class RouteDetails extends javax.swing.JPanel {
         // all inspector details must be here  
 
         if (cmbInspectorName.getSelectedItem() == null) {
-            
+
             JOptionPane.showMessageDialog(this, "You must add inspector");
 
-        } 
-        
-        else if (this.selectedInspectorSet.contains((User)cmbInspectorName.getSelectedItem())) {
-            
+        } else if (this.selectedInspectorSet.contains((User) cmbInspectorName.getSelectedItem())) {
+
             JOptionPane.showMessageDialog(this, "Inspector is added already");
-        } 
-        
-        else 
-        {
-            if(this.noofInspectors<3)
-            {
+        } else {
+            if (this.noofInspectors < 3) {
                 User aInspector;
 
                 Object obj = cmbInspectorName.getSelectedItem();
@@ -481,15 +509,11 @@ public class RouteDetails extends javax.swing.JPanel {
                 this.selectedInspectorSet.add(aInspector);
 
                 updateSelectedInspectorTable(this.selectedInspectorSet);
-                
+
                 this.noofInspectors++;
+            } else {
+                JOptionPane.showMessageDialog(this, "You can not assign four inspectors at once");
             }
-            
-            else
-            {
-               JOptionPane.showMessageDialog(this,"You can not assign four inspectors at once"); 
-            }
-            
 
         }
 
@@ -505,11 +529,10 @@ public class RouteDetails extends javax.swing.JPanel {
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         // TODO add your handling code here:
-        
-        String searchText=txtSearchRoute.getText();
-        
-        
-        
+
+        String searchText = txtSearchRoute.getText();
+
+
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void txtRouteId1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRouteId1ActionPerformed

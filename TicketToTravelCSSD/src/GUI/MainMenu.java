@@ -280,9 +280,15 @@ public class MainMenu extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         mainView.removeAll();
         mainView.setLayout(new BorderLayout());
-        mainView.add(new RouteDetails());
-        mainView.repaint();
-        pack();
+        try {
+            try {
+                mainView.add(new RouteDetails());
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
