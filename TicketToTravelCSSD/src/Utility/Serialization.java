@@ -3,7 +3,8 @@ package Utility;
 import Models.Inspector;
 import Models.Route;
 import Models.SetOfInspectors;
-import Models.SetOfPublicTransportManager;
+import Models.SetOfPassengers;
+import Models.SetOfPublicTransportManagers;
 import Models.SetOfRoutes;
 import Models.SetOfUsers;
 import Models.User;
@@ -72,9 +73,9 @@ public class Serialization {
 
     }
     
-    public static void serializePublicTransportManager(SetOfPublicTransportManager userSet) throws IOException {
+    public static void serializePublicTransportManager(SetOfPublicTransportManagers userSet) throws IOException {
 
-        SetOfPublicTransportManager INSTANCE = SetOfPublicTransportManager.getInstance();
+        SetOfPublicTransportManagers INSTANCE = SetOfPublicTransportManagers.getInstance();
         
         INSTANCE = userSet;
 
@@ -88,16 +89,53 @@ public class Serialization {
 
     }
     
-    public static SetOfPublicTransportManager desirializePublicTransportManager() throws IOException, ClassNotFoundException {
+    public static SetOfPublicTransportManagers desirializePublicTransportManager() throws IOException, ClassNotFoundException {
+        
         FileInputStream fis = new FileInputStream(new File("PublicTransportManagerData.ser"));
+        
         ObjectInputStream ois = new ObjectInputStream(fis);
-        SetOfPublicTransportManager users = SetOfPublicTransportManager.getInstance();
-        users= (SetOfPublicTransportManager) ois.readObject();
+        
+        SetOfPublicTransportManagers users = SetOfPublicTransportManagers.getInstance();
+        
+        users= (SetOfPublicTransportManagers) ois.readObject();
+        
         return users;
 
     }
+    
+    public static void serializePassenger(SetOfPassengers userSet) throws IOException {
 
+        SetOfPassengers INSTANCE = SetOfPassengers.getInstance();
+        
+        INSTANCE = userSet;
+
+        try (FileOutputStream fileOut = new FileOutputStream("PassengerData.ser")) {
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(INSTANCE);
+            out.flush();
+            out.close();
+        }
+        System.out.println("Serialized data is saved PassengerData.ser");
+
+    }
+    
+    public static SetOfPassengers desirializePassenger() throws IOException, ClassNotFoundException {
+        
+        FileInputStream fis = new FileInputStream(new File("PassengerData.ser"));
+        
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        
+        SetOfPassengers users = SetOfPassengers.getInstance();
+        
+        users= (SetOfPassengers) ois.readObject();
+        
+        return users;
+
+    }
+    
+   
     public static void serializeRoute(SetOfRoutes routeSet) throws IOException {
+        
         FileOutputStream fo = new FileOutputStream("RouteData.ser");
 
         ObjectOutputStream os = new ObjectOutputStream(fo);
