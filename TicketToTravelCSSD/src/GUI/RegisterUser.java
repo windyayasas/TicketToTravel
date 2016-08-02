@@ -45,7 +45,7 @@ public class RegisterUser extends javax.swing.JPanel {
         
         userAll.addAll(inspectorAll);
 
-        updateUserTable(userAllRoles);
+        updateUserTable(userAll);
 
     }
 
