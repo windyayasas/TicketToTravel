@@ -109,6 +109,17 @@ public class Serialization {
         userSet.add(user2);
 
         serializeUser(userSet);
+        
+        
+        useri1.setUserId(3);
+        useri2.setUserId(4);
+        
+        SetOfInspectors userSet1 = SetOfInspectors.getInstance();
+
+        userSet1.add(useri1);
+        userSet1.add(useri2);
+
+        serializeInspector(userSet1);
 
         SetOfUsers desUser = SetOfUsers.getInstance();
 
