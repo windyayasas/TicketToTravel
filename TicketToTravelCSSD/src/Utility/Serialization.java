@@ -122,6 +122,7 @@ public class Serialization {
         serializeInspector(userSet1);
 
         SetOfUsers desUser = SetOfUsers.getInstance();
+        SetOfInspectors desIns= SetOfInspectors.getInstance();
 
         Route aroute = new Route("Bus", "Mr.Bill");
 
@@ -135,6 +136,11 @@ public class Serialization {
 
         desUser = desirializeUser();
         System.out.println(desUser);
+        System.out.println(desUser.get(0).getAddress());
+        
+        desIns= desirializeInspector();
+        
+        System.out.println(desIns);
         System.out.println(desUser.get(0).getAddress());
 
     }
