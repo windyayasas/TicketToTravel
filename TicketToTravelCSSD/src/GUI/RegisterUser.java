@@ -25,25 +25,26 @@ import javax.swing.table.DefaultTableModel;
 public class RegisterUser extends javax.swing.JPanel {
 
     private SetOfUsers userAll;
-    private SetOfUsers userAllRoles;
     private SetOfInspectors inspectorAll;
+    private SetOfPassengers passengerAll;
+    private SetOfPublicTransportManager ptmAll;
     Validator vali;
 
     public RegisterUser() throws IOException, ClassNotFoundException {
         initComponents();
         vali = new Validator();
         userAll = SetOfUsers.getInstance();
-        userAll = desirializeUser();
-        inspectorAll= desirializeInspector();
-        userAllRoles=SetOfUsers.getInstance();
+        inspectorAll = desirializeInspector();
         
+
         initTablesAndCombo();
     }
-    
+
     public void initTablesAndCombo() {
-        userAllRoles.addAll(userAll);
-        userAllRoles.addAll(inspectorAll);
+        userAll.clear();
         
+        userAll.addAll(inspectorAll);
+
         updateUserTable(userAllRoles);
 
     }
@@ -452,19 +453,14 @@ public class RegisterUser extends javax.swing.JPanel {
         if (vali.userEmptFieldsVt(userName, email, password, address, secretQuestion, answer, location, role)) {
 
             if (vali.isValidEmailAddress(email)) {
-                 
+
                 User lastAcc = userAll.get(userAll.size() - 1);
-                if(role.equalsIgnoreCase("Ticket Inspector"))
-                {
-                    Inspector inspector= new Inspector(userName, email, password, address, secretQuestion, answer, location, role);
+                if (role.equalsIgnoreCase("Ticket Inspector")) {
+                    Inspector inspector = new Inspector(userName, email, password, address, secretQuestion, answer, location, role);
                     inspector.setUserId(lastAcc.getUserId() + 1);
                     userAll.add(inspector);
-                    
+
                 }
-                
-                
-                
-                
 
                 try {
                     Serialization.serializeUser(userAll);
@@ -555,7 +551,7 @@ public class RegisterUser extends javax.swing.JPanel {
             }
         }
 
-       initTablesAndCombo();
+        initTablesAndCombo();
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
