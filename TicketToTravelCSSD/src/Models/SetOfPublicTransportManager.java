@@ -6,6 +6,7 @@
 
 package Models;
 
+import java.io.ObjectStreamException;
 import java.util.Collection;
 import java.util.Vector;
 
@@ -29,6 +30,27 @@ public class SetOfPublicTransportManager extends Vector<PublicTransportManager> 
 
     public SetOfPublicTransportManager(Collection<? extends PublicTransportManager> c) {
         super(c);
+    }
+    
+    private static SetOfPublicTransportManager INSTANCE;
+
+    public static SetOfPublicTransportManager getInstance() {
+
+        if (INSTANCE == null) {
+
+            synchronized (SetOfInspectors.class) {
+
+                if (INSTANCE == null) {
+                    INSTANCE = new SetOfPublicTransportManager();
+                }
+            }
+        }
+
+        return INSTANCE;
+    }
+
+    private SetOfPublicTransportManager readResolve() throws ObjectStreamException {
+        return INSTANCE;
     }
     
     
