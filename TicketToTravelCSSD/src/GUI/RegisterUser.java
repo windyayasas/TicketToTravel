@@ -6,9 +6,11 @@
 package GUI;
 
 import Models.Inspector;
+import Models.SetOfInspectors;
 import Models.SetOfUsers;
 import Models.User;
 import Utility.Serialization;
+import static Utility.Serialization.desirializeInspector;
 import static Utility.Serialization.desirializeUser;
 import Utility.Validator;
 import java.io.IOException;
@@ -21,6 +23,7 @@ import javax.swing.table.DefaultTableModel;
 public class RegisterUser extends javax.swing.JPanel {
 
     private SetOfUsers userAll;
+    private SetOfInspectors inspectorAll;
     Validator vali;
 
     public RegisterUser() throws IOException, ClassNotFoundException {
@@ -28,6 +31,7 @@ public class RegisterUser extends javax.swing.JPanel {
         vali = new Validator();
         userAll = SetOfUsers.getInstance();
         userAll = desirializeUser();
+        inspectorAll= desirializeInspector();
         initTablesAndCombo();
     }
     

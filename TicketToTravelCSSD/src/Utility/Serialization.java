@@ -1,5 +1,6 @@
 package Utility;
 
+import Models.Inspector;
 import Models.Route;
 import Models.SetOfInspectors;
 import Models.SetOfRoutes;
@@ -92,7 +93,13 @@ public class Serialization {
 
         User user1 = new User("Chat", "chat@gmailcom", "123456", "malabe", "What?", "Here", "xyz", "passenger");
         User user2 = new User("Chat", "chat@gmailcom", "123456", "malabe", "What?", "Here", "xyz", "passenger");
-      
+        
+        
+        Inspector useri1 = new Inspector("Chat", "chat@gmailcom", "123456", "malabe", "What?", "Here", "xyz", "passenger");
+        Inspector useri2 = new Inspector("Chat", "chat@gmailcom", "123456", "malabe", "What?", "Here", "xyz", "passenger");
+        
+        
+        
         user1.setUserId(1);
         user2.setUserId(2);
         
