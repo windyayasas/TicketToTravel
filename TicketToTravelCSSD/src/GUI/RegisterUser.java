@@ -8,7 +8,7 @@ package GUI;
 import Models.Inspector;
 import Models.SetOfInspectors;
 import Models.SetOfPassengers;
-import Models.SetOfPublicTransportManagers;
+import Models.SetOfPublicTransportManager;
 import Models.SetOfUsers;
 import Models.User;
 import Utility.Serialization;

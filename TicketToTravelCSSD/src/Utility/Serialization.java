@@ -4,7 +4,7 @@ import Models.Inspector;
 import Models.Route;
 import Models.SetOfInspectors;
 import Models.SetOfPassengers;
-import Models.SetOfPublicTransportManagers;
+import Models.SetOfPublicTransportManager;
 import Models.SetOfRoutes;
 import Models.SetOfUsers;
 import Models.User;
@@ -73,9 +73,9 @@ public class Serialization {
 
     }
     
-    public static void serializePublicTransportManager(SetOfPublicTransportManagers userSet) throws IOException {
+    public static void serializePublicTransportManager(SetOfPublicTransportManager userSet) throws IOException {
 
-        SetOfPublicTransportManagers INSTANCE = SetOfPublicTransportManagers.getInstance();
+        SetOfPublicTransportManager INSTANCE = SetOfPublicTransportManager.getInstance();
         
         INSTANCE = userSet;
 
@@ -89,15 +89,15 @@ public class Serialization {
 
     }
     
-    public static SetOfPublicTransportManagers desirializePublicTransportManager() throws IOException, ClassNotFoundException {
+    public static SetOfPublicTransportManager desirializePublicTransportManager() throws IOException, ClassNotFoundException {
         
         FileInputStream fis = new FileInputStream(new File("PublicTransportManagerData.ser"));
         
         ObjectInputStream ois = new ObjectInputStream(fis);
         
-        SetOfPublicTransportManagers users = SetOfPublicTransportManagers.getInstance();
+        SetOfPublicTransportManager users = SetOfPublicTransportManager.getInstance();
         
-        users= (SetOfPublicTransportManagers) ois.readObject();
+        users= (SetOfPublicTransportManager) ois.readObject();
         
         return users;
 

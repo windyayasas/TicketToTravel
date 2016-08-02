@@ -14,34 +14,34 @@ import java.util.Vector;
  *
  * @author Chathuri Lakmini
  */
-public class SetOfPublicTransportManagers extends Vector<PublicTransportManager> {
+public class SetOfPublicTransportManager extends Vector<PublicTransportManager> {
 
-    public SetOfPublicTransportManagers(int initialCapacity, int capacityIncrement) {
+    public SetOfPublicTransportManager(int initialCapacity, int capacityIncrement) {
         super(initialCapacity, capacityIncrement);
     }
 
-    public SetOfPublicTransportManagers(int initialCapacity) {
+    public SetOfPublicTransportManager(int initialCapacity) {
         super(initialCapacity);
     }
 
-    public SetOfPublicTransportManagers() {
+    public SetOfPublicTransportManager() {
         super();
     }
 
-    public SetOfPublicTransportManagers(Collection<? extends PublicTransportManager> c) {
+    public SetOfPublicTransportManager(Collection<? extends PublicTransportManager> c) {
         super(c);
     }
     
-    private static SetOfPublicTransportManagers INSTANCE;
+    private static SetOfPublicTransportManager INSTANCE;
 
-    public static SetOfPublicTransportManagers getInstance() {
+    public static SetOfPublicTransportManager getInstance() {
 
         if (INSTANCE == null) {
 
-            synchronized (SetOfPublicTransportManagers.class) {
+            synchronized (SetOfPublicTransportManager.class) {
 
                 if (INSTANCE == null) {
-                    INSTANCE = new SetOfPublicTransportManagers();
+                    INSTANCE = new SetOfPublicTransportManager();
                 }
             }
         }
@@ -49,7 +49,7 @@ public class SetOfPublicTransportManagers extends Vector<PublicTransportManager>
         return INSTANCE;
     }
 
-    private SetOfPublicTransportManagers readResolve() throws ObjectStreamException {
+    private SetOfPublicTransportManager readResolve() throws ObjectStreamException {
         return INSTANCE;
     }
     
