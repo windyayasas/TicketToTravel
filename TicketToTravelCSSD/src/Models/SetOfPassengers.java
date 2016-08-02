@@ -10,6 +10,6 @@ package Models;
  *
  * @author windya yasas
  */
-public class SetOfPassenger {
+public class SetOfPassengers {
     
 }
