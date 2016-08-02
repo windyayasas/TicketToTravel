@@ -37,13 +37,13 @@ public class RouteDetails extends javax.swing.JPanel {
     public void initInspectorSet() {
         int totalUsers = this.userAll.size();
 
-        Inspector user = Inspector.getInstance();
+        User user = User.getInstance();
         for (int index = 0; index < totalUsers; index++) {
 
-            user =(Inspector) userAll.get(index);
-            if ( user.isAssiged() == false) {
+            user =userAll.get(index);
+            
                 this.InspectorSet.addUser(user);
-            }
+            
 
         }
 
