@@ -1,6 +1,7 @@
 package Utility;
 
 import Models.Route;
+import Models.SetOfInspectors;
 import Models.SetOfRoutes;
 import Models.SetOfUsers;
 import Models.User;
@@ -31,6 +32,7 @@ public class Serialization {
         System.out.println("Serialized data is saved UserData.ser");
 
     }
+    
 
     public static SetOfUsers desirializeUser() throws IOException, ClassNotFoundException {
         FileInputStream fis = new FileInputStream(new File("UserData.ser"));
@@ -41,6 +43,33 @@ public class Serialization {
         return users;
 
     }
+    
+    
+    public static void serializeInspector(SetOfInspectors userSet) throws IOException {
+
+        SetOfInspectors INSTANCE = SetOfInspectors.getInstance();
+        INSTANCE = userSet;
+
+        try (FileOutputStream fileOut = new FileOutputStream("InspectorData.ser")) {
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(INSTANCE);
+            out.flush();
+            out.close();
+        }
+        System.out.println("Serialized data is saved InspectorData.ser");
+
+    }
+    
+    public static SetOfInspectors desirializeInspector() throws IOException, ClassNotFoundException {
+        FileInputStream fis = new FileInputStream(new File("InspectorData.ser"));
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        SetOfInspectors users = SetOfInspectors.getInstance();
+        users= (SetOfInspectors) ois.readObject();
+        
+        return users;
+
+    }
+    
 
     public static void serializeRoute(SetOfRoutes routeSet) throws IOException {
         FileOutputStream fo = new FileOutputStream("RouteData.ser");

@@ -57,7 +57,7 @@ public class RouteDetails extends javax.swing.JPanel {
 
             user = this.InspectorSet.get(index);
 
-            cmbInspectorName.addItem(user);
+            cmbInspectorName.addItem(user.getUserName());
 
         }
 

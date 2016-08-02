@@ -6,6 +6,7 @@
 
 package Models;
 
+import java.io.ObjectStreamException;
 import java.util.Collection;
 import java.util.Vector;
 
@@ -29,6 +30,27 @@ public class SetOfInspectors extends Vector<Inspector> {
 
     public SetOfInspectors(Collection<? extends Inspector> c) {
         super(c);
+    }
+    
+    private static SetOfInspectors INSTANCE;
+
+    public static SetOfInspectors getInstance() {
+
+        if (INSTANCE == null) {
+
+            synchronized (SetOfInspectors.class) {
+
+                if (INSTANCE == null) {
+                    INSTANCE = new SetOfInspectors();
+                }
+            }
+        }
+
+        return INSTANCE;
+    }
+
+    private SetOfInspectors readResolve() throws ObjectStreamException {
+        return INSTANCE;
     }
     
     
