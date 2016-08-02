@@ -25,6 +25,7 @@ import javax.swing.table.DefaultTableModel;
 public class RegisterUser extends javax.swing.JPanel {
 
     private SetOfUsers userAll;
+    private SetOfUsers userAllRoles;
     private SetOfInspectors inspectorAll;
     Validator vali;
 
@@ -34,11 +35,16 @@ public class RegisterUser extends javax.swing.JPanel {
         userAll = SetOfUsers.getInstance();
         userAll = desirializeUser();
         inspectorAll= desirializeInspector();
+        userAllRoles=SetOfUsers.getInstance();
+        
         initTablesAndCombo();
     }
     
     public void initTablesAndCombo() {
-        updateUserTable(userAll);
+        userAllRoles.addAll(userAll);
+        userAllRoles.addAll(inspectorAll);
+        
+        updateUserTable(userAllRoles);
 
     }
 
