@@ -1,6 +1,9 @@
 package Utility;
 
+import Models.Inspector;
 import Models.Route;
+import Models.SetOfInspectors;
+import Models.SetOfPublicTransportManager;
 import Models.SetOfRoutes;
 import Models.SetOfUsers;
 import Models.User;
@@ -31,6 +34,7 @@ public class Serialization {
         System.out.println("Serialized data is saved UserData.ser");
 
     }
+    
 
     public static SetOfUsers desirializeUser() throws IOException, ClassNotFoundException {
         FileInputStream fis = new FileInputStream(new File("UserData.ser"));
@@ -38,6 +42,57 @@ public class Serialization {
         SetOfUsers users = SetOfUsers.getInstance();
         users= (SetOfUsers) ois.readObject();
         
+        return users;
+
+    }
+    
+    
+    public static void serializeInspector(SetOfInspectors userSet) throws IOException {
+
+        SetOfInspectors INSTANCE = SetOfInspectors.getInstance();
+        INSTANCE = userSet;
+
+        try (FileOutputStream fileOut = new FileOutputStream("InspectorData.ser")) {
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(INSTANCE);
+            out.flush();
+            out.close();
+        }
+        System.out.println("Serialized data is saved InspectorData.ser");
+
+    }
+    
+    public static SetOfInspectors desirializeInspector() throws IOException, ClassNotFoundException {
+        FileInputStream fis = new FileInputStream(new File("InspectorData.ser"));
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        SetOfInspectors users = SetOfInspectors.getInstance();
+        users= (SetOfInspectors) ois.readObject();
+        
+        return users;
+
+    }
+    
+    public static void serializePublicTransportManager(SetOfPublicTransportManager userSet) throws IOException {
+
+        SetOfPublicTransportManager INSTANCE = SetOfPublicTransportManager.getInstance();
+        
+        INSTANCE = userSet;
+
+        try (FileOutputStream fileOut = new FileOutputStream("PublicTransportManagerData.ser")) {
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(INSTANCE);
+            out.flush();
+            out.close();
+        }
+        System.out.println("Serialized data is saved PublicTransportManagerData.ser");
+
+    }
+    
+    public static SetOfPublicTransportManager desirializePublicTransportManager() throws IOException, ClassNotFoundException {
+        FileInputStream fis = new FileInputStream(new File("PublicTransportManagerData.ser"));
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        SetOfPublicTransportManager users = SetOfPublicTransportManager.getInstance();
+        users= (SetOfPublicTransportManager) ois.readObject();
         return users;
 
     }
@@ -63,7 +118,13 @@ public class Serialization {
 
         User user1 = new User("Chat", "chat@gmailcom", "123456", "malabe", "What?", "Here", "xyz", "passenger");
         User user2 = new User("Chat", "chat@gmailcom", "123456", "malabe", "What?", "Here", "xyz", "passenger");
-      
+        
+        
+        Inspector useri1 = new Inspector("Chat", "chat@gmailcom", "123456", "malabe", "What?", "Here", "xyz", "passenger");
+        Inspector useri2 = new Inspector("Chat", "chat@gmailcom", "123456", "malabe", "What?", "Here", "xyz", "passenger");
+        
+        
+        
         user1.setUserId(1);
         user2.setUserId(2);
         
@@ -73,8 +134,20 @@ public class Serialization {
         userSet.add(user2);
 
         serializeUser(userSet);
+        
+        
+        useri1.setUserId(3);
+        useri2.setUserId(4);
+        
+        SetOfInspectors userSet1 = SetOfInspectors.getInstance();
+
+        userSet1.add(useri1);
+        userSet1.add(useri2);
+
+        serializeInspector(userSet1);
 
         SetOfUsers desUser = SetOfUsers.getInstance();
+        SetOfInspectors desIns= SetOfInspectors.getInstance();
 
         Route aroute = new Route("Bus", "Mr.Bill");
 
@@ -88,6 +161,11 @@ public class Serialization {
 
         desUser = desirializeUser();
         System.out.println(desUser);
+        System.out.println(desUser.get(0).getAddress());
+        
+        desIns= desirializeInspector();
+        
+        System.out.println(desIns);
         System.out.println(desUser.get(0).getAddress());
 
     }
