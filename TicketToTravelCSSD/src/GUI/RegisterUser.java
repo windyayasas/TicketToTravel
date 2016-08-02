@@ -203,11 +203,11 @@ public class RegisterUser extends javax.swing.JPanel {
 
         jLabel3.setText("  Password   ");
 
-        jLabel7.setText("  Location    ");
+        jLabel7.setText("  Answer");
 
         jLabel8.setText("  User Role ");
 
-        cmbUserRole.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<< Select Role >>", "Passenger", "Ticket Inspector", "Transport manager", "Admin" }));
+        cmbUserRole.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<< Select Role >>", "Passenger", "Inspector", "Transport manager" }));
 
         txtAddress.setColumns(20);
         txtAddress.setRows(5);
